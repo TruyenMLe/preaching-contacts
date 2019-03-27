@@ -1,0 +1,14 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidebar [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+               [opened]="!mobileQuery.matches">
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <button mat-icon-button (click)="sidebar.toggle()"><mat-icon>menu</mat-icon></button>
+    </mat-toolbar>
+
+    <div class="content"></div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

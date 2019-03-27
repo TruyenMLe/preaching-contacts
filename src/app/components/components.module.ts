@@ -1,13 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatFormFieldModule, MatGridListModule, MatInputModule } from '@angular/material';
+import {
+  MatButtonModule, MatExpansionModule,
+  MatFormFieldModule,
+  MatGridListModule, MatIconModule,
+  MatInputModule, MatListModule,
+  MatSidenavModule,
+  MatToolbarModule
+} from '@angular/material';
 
 import { ComponentsRoutingModule } from './components-routing.module';
 import { LoginComponent } from './authentication/login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HomeComponent } from './dashboard/home/home.component';
+import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
+import { TopnavComponent } from './dashboard/topnav/topnav.component';
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, DashboardComponent, HomeComponent, SidebarComponent, TopnavComponent],
   imports: [
     CommonModule,
     ComponentsRoutingModule,
@@ -16,7 +27,12 @@ import { LoginComponent } from './authentication/login/login.component';
     MatFormFieldModule,
     MatInputModule,
     MatGridListModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    MatExpansionModule
   ]
 })
 export class ComponentsModule { }
