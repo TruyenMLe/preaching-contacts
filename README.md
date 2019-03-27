@@ -1,6 +1,6 @@
 # PreachingContacts
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.
+As our contact list increases, sometimes we might forget to text or give contact a call to remind them of Bible study. This project is created to help scheduling time and manage all of our contacts.
 
 ## Development server
 
