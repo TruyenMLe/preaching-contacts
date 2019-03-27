@@ -1,3 +1,27 @@
-<p>
-  login works!
-</p>
+<mat-grid-list cols="2" rowHeight="100vh">
+  <mat-grid-tile>
+    <img src="../../../../assets/images/preaching_illustration.png" alt="Preaching Illustration" class="width-100-percent">
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <form id="login-form" name="loginForm" [formGroup]="loginForm">
+      <h1 class="headline">Preaching to 7 billions <br> with the heart of Mother</h1>
+
+      <mat-form-field class="width-100-percent">
+        <input type="text" name="username" id="username" placeholder="Username" matInput formControlName="username" />
+      </mat-form-field>
+
+      <mat-form-field class="width-100-percent">
+        <input type="text" name="password" id="password" placeholder="Password" matInput formControlName="password" />
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" class="float-right">LOG IN</button>
+
+      <a mat-flat-button routerLink="/register" class="float-right margin-right">Sign up (Regístrate)</a>
+
+      <br class="clear-floats" />
+    </form>
+
+    <footer>@Copyright 2019 at Wheat Ridge Zion.</footer>
+  </mat-grid-tile>
+</mat-grid-list>

@@ -1,2 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+body {
+  margin: 0;
+}
+
+/* Width */
+.width-100-percent {
+  width: 100% !important;
+}
+/* Width */
+
+/* Margin */
+.margin-right {
+  margin-right: 10px !important;
+}
+/* Margin */
+
+/* Miscellaneous */
+.float-right {
+  float: right !important;
+}
+
+.clear-floats {
+  clear: both;
+}
+/* Miscellaneous */

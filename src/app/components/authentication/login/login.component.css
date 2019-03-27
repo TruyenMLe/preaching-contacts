@@ -1,0 +1,10 @@
+.headline {
+  font-family: "Pompiere", Roboto, "Helvetica Neue", sans-serif;
+  font-size: 3.75rem;
+  text-align: center;
+}
+
+footer {
+  position: absolute;
+  bottom: 10px;
+}
