@@ -7,6 +7,7 @@ h2 {
   font-family: "Pompiere", Roboto, "Helvetica Neue", sans-serif;
   text-align: center;
   color: #ffffff;
+  margin: 18px;
 }
 
 h5 {
@@ -23,10 +24,13 @@ ul li {
 
 .mat-nav-list {
   padding-top: 0;
+  background: #2980b9;
+  height: calc(100vh - 64px - 100px);
+  overflow: auto;
 }
 
-.mat-list-item {
-  background: #2980b9;
+.mat-list-item.active {
+  background: #206694;
 }
 
 .mat-list-item.no-hover:hover {
@@ -56,6 +60,7 @@ a.mat-flat-button i {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #3498db;
 }
 
 .avatar img {
@@ -66,4 +71,14 @@ a.mat-flat-button i {
 .avatar div {
   font-family: "Pompiere", Roboto, "Helvetica Neue", sans-serif;
   color: #ffffff;
+}
+
+@media (max-width: 599px) {
+  h2 {
+    margin: 14px;
+  }
+
+  .mat-nav-list {
+    height: calc(100vh - 56px - 100px);
+  }
 }

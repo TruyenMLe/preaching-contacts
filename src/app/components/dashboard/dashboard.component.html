@@ -6,7 +6,22 @@
 
   <mat-sidenav-content>
     <mat-toolbar>
-      <button mat-icon-button (click)="sidebar.toggle()"><mat-icon>menu</mat-icon></button>
+      <div class="menu-item">
+        <button mat-icon-button (click)="sidebar.toggle()"><mat-icon>menu</mat-icon></button>
+        <h3>{{pageTitle}}</h3>
+      </div>
+
+      <div class="menu-item">
+        <mat-icon matBadge="8" matBadgePosition="after" class="material-icons-outlined margin-right-2x">
+          notifications
+        </mat-icon>
+
+        <i class="material-icons-outlined" [matMenuTriggerFor]="quickLinks">more_horiz</i>
+        <mat-menu #quickLinks="matMenu">
+          <button mat-menu-item><i class="material-icons md-18 margin-right">add</i> <span>New Contact</span></button>
+          <button mat-menu-item><i class="material-icons md-18 margin-right">exit_to_app</i> Logout</button>
+        </mat-menu>
+      </div>
     </mat-toolbar>
 
     <div class="content"></div>

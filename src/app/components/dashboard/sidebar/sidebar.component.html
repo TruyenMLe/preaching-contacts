@@ -6,7 +6,7 @@
       <h5>MAIN</h5>
     </mat-list-item>
 
-    <mat-list-item>
+    <mat-list-item [ngClass]="{active: currentPage === 'Home'}">
       <a mat-flat-button><i class="material-icons md-18">home</i> <span>Home</span></a>
     </mat-list-item>
 
@@ -93,11 +93,7 @@
         </li>
       </ul>
     </mat-list-item>
-  </mat-nav-list>
-</div>
 
-<div>
-  <mat-nav-list>
     <mat-list-item [disableRipple]="true" class="no-hover">
       <h5>ADDITIONAL</h5>
     </mat-list-item>

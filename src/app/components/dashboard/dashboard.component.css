@@ -5,3 +5,35 @@
 .content {
   height: calc(100vh - 64px);
 }
+
+.content .mat-fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.mat-toolbar {
+  background: #ffffff;
+  color: #7f8c8d;
+  justify-content: space-between;
+}
+
+.mat-toolbar .menu-item {
+  display: flex;
+  align-items: center;
+}
+
+.mat-menu-item {
+  line-height: 18px;
+}
+
+.mat-menu-item i,
+.mat-menu-item span {
+  float: left;
+}
+
+@media (max-width: 599px) {
+  .content {
+    height: calc(100vh - 56px);
+  }
+}

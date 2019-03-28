@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
+  MatBadgeModule,
   MatButtonModule, MatExpansionModule,
   MatFormFieldModule,
   MatGridListModule, MatIconModule,
-  MatInputModule, MatListModule,
+  MatInputModule, MatListModule, MatMenuModule,
   MatSidenavModule,
   MatToolbarModule
 } from '@angular/material';
@@ -32,7 +33,9 @@ import { TopnavComponent } from './dashboard/topnav/topnav.component';
     MatToolbarModule,
     MatIconModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatBadgeModule,
+    MatMenuModule
   ]
 })
 export class ComponentsModule { }
