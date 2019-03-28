@@ -1,13 +1,13 @@
 <mat-sidenav-container>
   <mat-sidenav #sidebar [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
-               [opened]="!mobileQuery.matches">
+               [opened]="showMenu">
     <app-sidebar></app-sidebar>
   </mat-sidenav>
 
   <mat-sidenav-content>
     <mat-toolbar>
       <div class="menu-item">
-        <button mat-icon-button (click)="sidebar.toggle()"><mat-icon>menu</mat-icon></button>
+        <button mat-icon-button (click)="toggleSidebar()"><mat-icon>menu</mat-icon></button>
         <h3>{{pageTitle}}</h3>
       </div>
 

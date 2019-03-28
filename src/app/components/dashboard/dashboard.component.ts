@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ActivatedRoute } from '@angular/router';
 
@@ -7,7 +7,9 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('sidebar') sidebar;
+  showMenu = false;
   mobileQuery: MediaQueryList;
   pageTitle: string;
   private mobileQueryListener: () => void;
@@ -28,6 +30,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this.mobileQueryListener);
+  }
+
+  /***
+   * Temporary hack for fixing the sidebar opening issue when additional margin is incorrectly calculated
+   * For more information, refer to https://github.com/angular/material2/issues/6743
+   */
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.toggleSidebar();
+    }, 100);
+  }
+
+  toggleSidebar() {
+    this.sidebar.toggle();
   }
 
 }
