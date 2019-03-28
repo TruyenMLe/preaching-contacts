@@ -38,6 +38,22 @@ ul li {
   cursor: default;
 }
 
+.mat-list-item.sub-route {
+  background: #206694;
+  height: 36px;
+  display: none;
+  -webkit-transition: display .4s ease 0s;
+  transition: display .4s ease 0s;
+}
+
+.mat-list-item.sub-route a.mat-flat-button {
+  padding-left: 50px;
+}
+
+.mat-list-item.sub-route.active {
+  display: block;
+}
+
 a.mat-flat-button {
   background: transparent;
   color: #ffffff;
@@ -50,6 +66,10 @@ a.mat-flat-button {
 a.mat-flat-button i {
   float: left;
   margin-right: 15px;
+}
+
+a.mat-flat-button i:nth-child(2) {
+  float: right;
 }
 
 .avatar {
