@@ -26,7 +26,14 @@ ul li {
   padding-top: 0;
   background: #2980b9;
   height: calc(100vh - 64px - 100px);
-  overflow: auto;
+  overflow-y: scroll;
+  /* Firefox only for hiding scrollbar but still enable */
+  scrollbar-width: none;
+}
+
+/* Chrome fix for hiding scrollbar but still enable */
+.mat-nav-list::-webkit-scrollbar {
+  width: 0;
 }
 
 .mat-list-item.active {
