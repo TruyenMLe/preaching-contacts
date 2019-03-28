@@ -50,8 +50,12 @@ ul li {
   padding-left: 50px;
 }
 
-.mat-list-item.sub-route.active {
+.mat-list-item.sub-route.displayed {
   display: block;
+}
+
+.mat-list-item.sub-route.active {
+  background: #185c8a;
 }
 
 a.mat-flat-button {

@@ -30,7 +30,8 @@
 
         <!-- Child -->
         <mat-list-item class="sub-route" *ngFor="let childRoute of route.children"
-                       [ngClass]="{active: currentPage === route.title}" (click)="goToPage(route.value, childRoute.value)">
+                       [ngClass]="{displayed: currentPage === route.title, active: currentPage === childRoute.title}"
+                       (click)="goToPage(route.value, childRoute.value)">
           <a mat-flat-button>{{childRoute.value}}</a>
         </mat-list-item>
         <!-- Child -->
