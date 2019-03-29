@@ -1,0 +1,24 @@
+table {
+  width: 100%;
+}
+
+tr.data-detail-row {
+  height: 0;
+}
+
+tr.data-row:not(.data-expanded-row):hover {
+  background: #f5f5f5;
+}
+
+tr.data-row:not(.data-expanded-row):active {
+  background: #efefef;
+}
+
+.data-row td {
+  border-bottom-width: 0;
+}
+
+.data-row-detail {
+  overflow: hidden;
+  display: flex;
+}
