@@ -51,4 +51,8 @@ body {
 .clear-floats {
   clear: both;
 }
+
+.mat-drawer-container {
+  background: #ecf0f1;
+}
 /* Miscellaneous */
