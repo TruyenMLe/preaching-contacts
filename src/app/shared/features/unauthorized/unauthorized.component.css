@@ -1,0 +1,47 @@
+.wrapper {
+  height: 100vh;
+  background: #3498db;
+  color: #ffffff;
+  font-family: "Pompiere", Roboto, "Helvetica Neue", sans-serif;
+}
+
+.wrapper-background {
+  height: 100%;
+  background: url('../../../../assets/images/403.png') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.wrapper-content {
+  height: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.page-content {
+  text-align: center;
+}
+
+.page-content h1 {
+  font-size: 6rem;
+  margin: 0;
+}
+
+.page-content h3 {
+  font-size: 1.5rem;
+}
+
+.page-content h4 {
+  font-size: 1.125rem;
+}
+
+.page-content a {
+  padding: 5px;
+  min-width: 30px;
+}

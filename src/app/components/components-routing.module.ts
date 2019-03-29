@@ -30,6 +30,8 @@ import { AccountAccessComponent } from './dashboard/admin/account-access/account
 import { AddGroupComponent } from './dashboard/admin/add-group/add-group.component';
 import { MoveMemberComponent } from './dashboard/admin/move-member/move-member.component';
 import { ReportsComponent } from './dashboard/admin/reports/reports.component';
+import { UnauthorizedComponent } from '../shared/features/unauthorized/unauthorized.component';
+import { AuthGuardService } from '../shared/features/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -176,6 +178,7 @@ const routes: Routes = [
       {
         path: 'admin',
         component: AdminComponent,
+        canActivate: [AuthGuardService],
         data: { title: 'Admin' },
         children: [
           {
@@ -211,6 +214,10 @@ const routes: Routes = [
         ]
       }
     ]
+  },
+  {
+    path: '403',
+    component: UnauthorizedComponent
   }
 ];
 

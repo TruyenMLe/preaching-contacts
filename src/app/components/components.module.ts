@@ -44,6 +44,7 @@ import { AddGroupComponent } from './dashboard/admin/add-group/add-group.compone
 import { MoveMemberComponent } from './dashboard/admin/move-member/move-member.component';
 import { ReportsComponent } from './dashboard/admin/reports/reports.component';
 import { NewContactComponent } from './dashboard/forms/new-contact/new-contact.component';
+import { FeaturesModule } from '../shared/features/features.module';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { NewContactComponent } from './dashboard/forms/new-contact/new-contact.c
     MatListModule,
     MatExpansionModule,
     MatBadgeModule,
-    MatMenuModule
+    MatMenuModule,
+    FeaturesModule
   ]
 })
 export class ComponentsModule {
