@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
+import { NameValue } from '../../../types';
+
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
@@ -15,16 +17,16 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 })
 export class DataTableComponent implements OnInit {
   @Input() dataSource: any[];
+  @Input() columnsToDisplay: NameValue[];
+  @Input() stickyColumn: string;
 
-  columnsToDisplay: string[];
-  stickyColumn: string;
   expandedElement: any | null;
+  columnsToDisplayValues: string[];
 
   constructor() { }
 
   ngOnInit() {
-    this.columnsToDisplay = ['contactName', 'preachedAt', 'preachDate', 'phoneNumber'];
-    this.stickyColumn = 'name';
+    this.columnsToDisplayValues = this.columnsToDisplay.map(column => column.value);
   }
 
 }
