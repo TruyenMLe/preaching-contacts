@@ -1,2 +1,6 @@
-<app-data-table [dataSource]="dataSource" [columnsToDisplay]="columnsToDisplay"
-                [stickyColumn]="stickyColumn"></app-data-table>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons [length]="pageLength" [pageIndex]="pageIndex"
+               [pageSize]="pageSize" (page)="goToNewPage($event)"></mat-paginator>
+<div class="personal-contacts">
+  <app-data-table [dataSource]="dataSource" [columnsToDisplay]="columnsToDisplay"
+                  [stickyColumn]="stickyColumn"></app-data-table>
+</div>

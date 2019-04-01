@@ -6,7 +6,7 @@ import {
   MatButtonModule, MatExpansionModule,
   MatFormFieldModule,
   MatGridListModule, MatIconModule,
-  MatInputModule, MatListModule, MatMenuModule,
+  MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule,
   MatSidenavModule,
   MatToolbarModule
 } from '@angular/material';
@@ -97,6 +97,7 @@ import { FeaturesModule } from '../shared/features/features.module';
     MatExpansionModule,
     MatBadgeModule,
     MatMenuModule,
+    MatPaginatorModule,
     FeaturesModule
   ]
 })

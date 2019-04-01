@@ -1,0 +1,11 @@
+.personal-contacts {
+  height: calc(100% - 56px);
+  overflow: auto;
+  /* Firefox only for hiding scrollbar but still enable */
+  scrollbar-width: none;
+}
+
+/* Chrome fix for hiding scrollbar but still enable */
+.personal-contacts::-webkit-scrollbar {
+  width: 0;
+}
