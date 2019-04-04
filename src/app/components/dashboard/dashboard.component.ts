@@ -60,7 +60,9 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.translate.use(result);
+      if (result) {
+        this.translate.use(result);
+      }
     });
   }
 
