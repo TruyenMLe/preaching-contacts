@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
+  MatAutocompleteModule,
   MatBadgeModule,
-  MatButtonModule, MatDialogModule, MatExpansionModule,
+  MatButtonModule, MatCheckboxModule, MatDialogModule, MatExpansionModule,
   MatFormFieldModule,
   MatGridListModule, MatIconModule,
-  MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule, MatSelectModule,
+  MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule, MatRadioModule, MatSelectModule,
   MatSidenavModule,
   MatToolbarModule
 } from '@angular/material';
@@ -103,6 +104,9 @@ import { FeaturesModule } from '../shared/features/features.module';
     MatPaginatorModule,
     MatDialogModule,
     MatSelectModule,
+    MatAutocompleteModule,
+    MatCheckboxModule,
+    MatRadioModule,
     FeaturesModule,
     TranslateModule
   ],

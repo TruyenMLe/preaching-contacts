@@ -47,7 +47,7 @@ export class SidebarComponent implements OnInit {
         ]
       },
       { title: 'Forms', value: 'Forms', icon: 'insert_comment', children: [
-          { title: 'Contacts', value: 'Contacts' },
+          { title: 'Contacts', value: 'Contacts', translation: 'CONTACT_INFORMATION' },
           { title: 'Requests Forms', value: 'Requests Forms' }
         ]
       },
