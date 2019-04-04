@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 interface CustomRoute {
   isGroupHeader?: boolean;
   value: string;
+  translation?: string;
   title?: string;
   icon?: string;
   children?: any[];
@@ -26,9 +27,9 @@ export class SidebarComponent implements OnInit {
     this.routes = [
       { isGroupHeader: true, value: 'MAIN' },
       { title: 'Home', value: 'Home', icon: 'home' },
-      { title: 'Notifications', value: 'Notifications', icon: 'notifications' },
+      { title: 'Notifications', value: 'Notifications', translation: 'NOTIFICATIONS', icon: 'notifications' },
       {
-        title: 'Elohim Academy', value: 'Elohim Academy', icon: 'school', children: [
+        title: 'Elohim Academy', value: 'Elohim Academy', translation: 'APPLICATION', icon: 'school', children: [
           { title: 'Schedules', value: 'Schedules' },
           { title: 'Authorized List', value: 'Authorized List' },
           { title: 'Set Schedule', value: 'Set Schedule' },

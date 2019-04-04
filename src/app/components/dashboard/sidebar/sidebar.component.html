@@ -13,7 +13,9 @@
       <mat-list-item *ngIf="!route.isGroupHeader && !route.children?.length"
                      [ngClass]="{active: currentPage === route.title}"
                      (click)="goToPage(route.value)">
-        <a mat-flat-button><i class="material-icons md-18">{{route.icon}}</i> <span>{{route.value}}</span></a>
+        <a mat-flat-button>
+          <i class="material-icons md-18">{{route.icon}}</i> <span>{{(route.translation || route.value) | translate}}</span>
+        </a>
       </mat-list-item>
       <!-- Standard Route -->
 
@@ -22,7 +24,7 @@
         <!-- Parent -->
         <mat-list-item [ngClass]="{active: currentPage === route.title}" (click)="goToPage(route.value)">
           <a mat-flat-button>
-            <i class="material-icons md-18">{{route.icon}}</i> {{route.value}}
+            <i class="material-icons md-18">{{route.icon}}</i> {{(route.translation || route.value) | translate}}
             <i class="material-icons">expand_more</i>
           </a>
         </mat-list-item>
@@ -32,7 +34,7 @@
         <mat-list-item class="sub-route" *ngFor="let childRoute of route.children"
                        [ngClass]="{displayed: currentPage === route.title, active: currentPage === childRoute.title}"
                        (click)="goToPage(route.value, childRoute.value)">
-          <a mat-flat-button>{{childRoute.value}}</a>
+          <a mat-flat-button>{{(childRoute.translation || childRoute.value) | translate}}</a>
         </mat-list-item>
         <!-- Child -->
       </ng-container>
