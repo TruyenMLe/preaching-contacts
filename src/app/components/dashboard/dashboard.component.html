@@ -19,6 +19,11 @@
         <i class="material-icons-outlined" [matMenuTriggerFor]="quickLinks">more_horiz</i>
         <mat-menu #quickLinks="matMenu">
           <button mat-menu-item><i class="material-icons md-18 margin-right">add</i> <span>New Contact</span></button>
+
+          <button mat-menu-item (click)="openDialog()">
+            <i class="material-icons md-18 margin-right">translate</i> <span>Switch Language</span>
+          </button>
+
           <button mat-menu-item><i class="material-icons md-18 margin-right">exit_to_app</i> Logout</button>
         </mat-menu>
       </div>

@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatBadgeModule,
-  MatButtonModule, MatExpansionModule,
+  MatButtonModule, MatDialogModule, MatExpansionModule,
   MatFormFieldModule,
   MatGridListModule, MatIconModule,
-  MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule,
+  MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule, MatSelectModule,
   MatSidenavModule,
   MatToolbarModule
 } from '@angular/material';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ComponentsRoutingModule } from './components-routing.module';
 import { LoginComponent } from './authentication/login/login.component';
@@ -44,6 +45,7 @@ import { AddGroupComponent } from './dashboard/admin/add-group/add-group.compone
 import { MoveMemberComponent } from './dashboard/admin/move-member/move-member.component';
 import { ReportsComponent } from './dashboard/admin/reports/reports.component';
 import { NewContactComponent } from './dashboard/forms/new-contact/new-contact.component';
+import { SwitchLanguageDialogComponent } from './dashboard/switch-language-dialog/switch-language-dialog.component';
 import { FeaturesModule } from '../shared/features/features.module';
 
 @NgModule({
@@ -79,7 +81,8 @@ import { FeaturesModule } from '../shared/features/features.module';
     AddGroupComponent,
     MoveMemberComponent,
     ReportsComponent,
-    NewContactComponent
+    NewContactComponent,
+    SwitchLanguageDialogComponent
   ],
   imports: [
     CommonModule,
@@ -98,7 +101,13 @@ import { FeaturesModule } from '../shared/features/features.module';
     MatBadgeModule,
     MatMenuModule,
     MatPaginatorModule,
-    FeaturesModule
+    MatDialogModule,
+    MatSelectModule,
+    FeaturesModule,
+    TranslateModule
+  ],
+  entryComponents: [
+    SwitchLanguageDialogComponent
   ]
 })
 export class ComponentsModule {
