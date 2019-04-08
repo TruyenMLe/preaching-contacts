@@ -27,7 +27,7 @@ function login(req, res) {
         if (user._doc.restricted) {
           res.status(500).json({message: 'User is restricted. Unable to login!', messageCode: 'restricted'});
         } else if (user._doc.disabled) {
-          res.status(200).json({
+          res.status(500).json({
             message: 'Account is already set up. Waiting for authorization!',
             messageCode: 'disabled'
           });

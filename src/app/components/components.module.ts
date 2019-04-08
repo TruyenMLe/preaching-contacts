@@ -48,6 +48,7 @@ import { ReportsComponent } from './dashboard/admin/reports/reports.component';
 import { NewContactComponent } from './dashboard/forms/new-contact/new-contact.component';
 import { SwitchLanguageDialogComponent } from './dashboard/switch-language-dialog/switch-language-dialog.component';
 import { FeaturesModule } from '../shared/features/features.module';
+import { ServicesModule } from '../shared/services/services.module';
 
 @NgModule({
   declarations: [
@@ -109,6 +110,7 @@ import { FeaturesModule } from '../shared/features/features.module';
     MatRadioModule,
     MatStepperModule,
     FeaturesModule,
+    ServicesModule,
     TranslateModule
   ],
   entryComponents: [
