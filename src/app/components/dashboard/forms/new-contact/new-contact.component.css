@@ -3,10 +3,32 @@
   padding: 10px;
 }
 
+.info-group {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+}
+
+.info-group label {
+  margin-bottom: 7px;
+}
+
+.step-content {
+  width: 50%;
+  margin: 0 auto;
+  height: 100%;
+  overflow: auto;
+}
+
 mat-form-field {
   width: 100%;
 }
 
-.mat-radio-button ~ .mat-radio-button {
-  margin-left: 16px;
+mat-radio-group {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-radio-button {
+  margin: 5px;
 }

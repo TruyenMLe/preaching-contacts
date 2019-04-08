@@ -8,7 +8,7 @@ import {
   MatFormFieldModule,
   MatGridListModule, MatIconModule,
   MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule, MatRadioModule, MatSelectModule,
-  MatSidenavModule,
+  MatSidenavModule, MatStepperModule,
   MatToolbarModule
 } from '@angular/material';
 import { TranslateModule } from '@ngx-translate/core';
@@ -107,6 +107,7 @@ import { FeaturesModule } from '../shared/features/features.module';
     MatAutocompleteModule,
     MatCheckboxModule,
     MatRadioModule,
+    MatStepperModule,
     FeaturesModule,
     TranslateModule
   ],

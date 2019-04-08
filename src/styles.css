@@ -31,6 +31,10 @@ body {
 .width-100-percent {
   width: 100% !important;
 }
+
+.width-50-percent {
+  width: 50% !important;
+}
 /* Width */
 
 /* Margin */

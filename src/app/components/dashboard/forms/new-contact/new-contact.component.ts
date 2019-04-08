@@ -11,18 +11,22 @@ import { ContactData } from '../../../../types';
 export class NewContactComponent implements OnInit {
   newContact: ContactData;
   members: any[];
-  newContactForm: FormGroup = this.fb.group({
+  contactForm: FormGroup = this.fb.group({
     firstPartner: '',
     secondPartner: '',
     contactName: '',
     phoneNumber: '',
     emailAddress: '',
+  });
+  appointmentForm: FormGroup = this.fb.group({
     appointmentDate: '',
     appointmentTime: '',
-    appointmentLocationOption: '',
     appointmentLocation: '',
-    campusStudent: '',
+    otherLocation: '',
     qualifiedPreaching: '',
+  });
+  additionalForm: FormGroup = this.fb.group({
+    campusStudent: '',
     preachDifferentSubject: '',
     preachingLocation: '',
     gender: '',
@@ -35,6 +39,13 @@ export class NewContactComponent implements OnInit {
     religion: ''
   });
   user: any;
+  showPhoneNumberInput: boolean;
+  showEmailAddressInput: boolean;
+  showOtherLocation: boolean;
+  showOtherSubjects: boolean;
+  showCurrentAge: boolean;
+  showOtherLanguage: boolean;
+  showOtherReligion: boolean;
 
   constructor(private fb: FormBuilder) {
     this.user = {firstName: 'Tyler', lastName: 'Le'};
@@ -45,5 +56,33 @@ export class NewContactComponent implements OnInit {
   }
 
   submitForm() {}
+
+  toggleEmailAddress(emailChk, rejectChk) {
+    this.showEmailAddressInput = emailChk.checked;
+
+    if (rejectChk.checked) {
+      rejectChk.toggle();
+    }
+  }
+
+  togglePhoneNumber(phoneChk, rejectChk) {
+    this.showPhoneNumberInput = phoneChk.checked;
+
+    if (rejectChk.checked) {
+      rejectChk.toggle();
+    }
+  }
+
+  toggleRejectOption(phoneChk, emailChk) {
+    if (this.showPhoneNumberInput) {
+      this.showPhoneNumberInput = false;
+      phoneChk.toggle();
+    }
+
+    if (this.showEmailAddressInput) {
+      this.showEmailAddressInput = false;
+      emailChk.toggle();
+    }
+  }
 
 }

@@ -1,167 +1,218 @@
 <div class="contact-form">
-  <div class="contact-form-content">
-    <form name="newContactForm" id="newContactForm" [formGroup]="newContactForm" novalidate>
-      <mat-grid-list cols="2" rowHeight="1:1">
-        <mat-grid-tile>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Main
-              </mat-panel-title>
-            </mat-expansion-panel-header>
+  <mat-horizontal-stepper labelPosition="bottom" #stepper>
+    <mat-step [stepControl]="contactForm">
+      <div class="step-content">
+        <form [formGroup]="contactForm">
+          <ng-template matStepLabel>Contact Info</ng-template>
 
-            <label>{{newContact.firstName + ' ' + newContact.lastName}}</label>
+          <mat-form-field floatLabel="always">
+            <input matInput placeholder="Contact Name" formControlName="contactName" required>
+          </mat-form-field>
 
-            <mat-form-field>
-              <input type="text" matInput placeholder="First Partner" formControlName="firstPartner" [matAutocomplete]="firstPartner">
-            </mat-form-field>
+          <mat-form-field floatLabel="always">
+            <input matInput placeholder="First Partner" formControlName="firstPartner" [matAutocomplete]="firstPartner">
+          </mat-form-field>
 
-            <mat-autocomplete #firstPartner="matAutocomplete">
-              <mat-option *ngFor="let member of members" [value]="member">{{member.displayName}}</mat-option>
-            </mat-autocomplete>
+          <mat-autocomplete #firstPartner="matAutocomplete">
+            <mat-option *ngFor="let member of members" [value]="member">{{member.displayName}}</mat-option>
+          </mat-autocomplete>
 
-            <mat-form-field>
-              <input type="text" matInput placeholder="Second Partner" formControlName="secondPartner" [matAutocomplete]="secondPartner">
-            </mat-form-field>
+          <mat-form-field floatLabel="always">
+            <input type="text" matInput placeholder="Second Partner" formControlName="secondPartner"
+                   [matAutocomplete]="secondPartner">
+          </mat-form-field>
 
-            <mat-autocomplete #secondPartner="matAutocomplete">
-              <mat-option *ngFor="let member of members" [value]="member">{{member.displayName}}</mat-option>
-            </mat-autocomplete>
+          <mat-autocomplete #secondPartner="matAutocomplete">
+            <mat-option *ngFor="let member of members" [value]="member">{{member.displayName}}</mat-option>
+          </mat-autocomplete>
 
-            <mat-form-field>
-              <input matInput placeholder="Contact Name" formControlName="contactName" required>
-            </mat-form-field>
 
+          <div class="info-group">
             <label>{{ 'CONTACT_WAY' | translate }}</label>
-            <div class="width-100-percent">
-              <mat-checkbox>{{ 'PHONE_NUMBER' | translate }}</mat-checkbox>
-            </div>
-            <div class="width-100-percent">
-              <mat-checkbox>{{ 'EMAIL_ADDRESS' | translate }}</mat-checkbox>
-            </div>
-            <div class="width-100-percent">
-              <mat-checkbox>{{ 'REJECT_TRUTH' | translate }}</mat-checkbox>
-            </div>
+            <mat-checkbox #phoneChk
+                          (change)="togglePhoneNumber(phoneChk, rejectChk)">{{ 'PHONE_NUMBER' | translate }}</mat-checkbox>
 
-            <mat-form-field>
-              <input matInput placeholder="Phone Number" formControlName="phoneNumber">
-            </mat-form-field>
+            <mat-checkbox #emailChk
+                          (change)="toggleEmailAddress(emailChk, rejectChk)">{{ 'EMAIL_ADDRESS' | translate }}</mat-checkbox>
 
-            <mat-form-field>
-              <input matInput placeholder="Email Address" formControlName="emailAddress">
-            </mat-form-field>
+            <mat-checkbox #rejectChk
+                          (change)="toggleRejectOption(phoneChk, emailChk)">{{ 'REJECT_TRUTH' | translate }}</mat-checkbox>
+          </div>
 
-            <mat-form-field>
-              <input matInput placeholder="Appointment Date" formControlName="appointmentDate">
-            </mat-form-field>
+          <mat-form-field floatLabel="always" *ngIf="showPhoneNumberInput">
+            <input matInput placeholder="Phone Number" formControlName="phoneNumber">
+          </mat-form-field>
 
-            <mat-form-field>
-              <input matInput placeholder="Appointment Time" formControlName="appointmentTime">
-            </mat-form-field>
+          <mat-form-field floatLabel="always" *ngIf="showEmailAddressInput">
+            <input matInput placeholder="Email Address" formControlName="emailAddress">
+          </mat-form-field>
 
-            <mat-radio-group aria-label="Appointment Location" formControlName="appointmentLocationOption">
+          <div>
+            <button mat-flat-button matStepperNext color="primary">Next</button>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="appointmentForm">
+      <div class="step-content">
+        <form [formGroup]="appointmentForm">
+          <ng-template matStepLabel>Appointment Info</ng-template>
+
+          <mat-form-field floatLabel="always">
+            <input matInput placeholder="Appointment Date" formControlName="appointmentDate">
+          </mat-form-field>
+
+          <mat-form-field floatLabel="always">
+            <input matInput placeholder="Appointment Time" formControlName="appointmentTime">
+          </mat-form-field>
+
+          <div class="info-group">
+            <label>Appointment Location</label>
+
+            <mat-radio-group formControlName="appointmentLocation"
+                             (change)="showOtherLocation = ($event.value === 'Other')">
               <mat-radio-button value="Church">{{ 'CHURCH' | translate }}</mat-radio-button>
               <mat-radio-button value="Other">{{ 'OTHER' | translate }}</mat-radio-button>
             </mat-radio-group>
+          </div>
 
-            <mat-form-field>
-              <input matInput placeholder="Appointment Location" formControlName="appointmentLocation">
-            </mat-form-field>
+          <mat-form-field floatLabel="always" *ngIf="showOtherLocation">
+            <input matInput placeholder="Other Location" formControlName="otherLocation">
+          </mat-form-field>
 
-            <mat-radio-group aria-label="Campus Student" formControlName="campusStudent">
+          <div class="info-group">
+            <label>Preach Long Enough</label>
+
+            <mat-radio-group formControlName="qualifiedPreaching">
               <mat-radio-button value="Yes">{{ 'YES' | translate }}</mat-radio-button>
               <mat-radio-button value="No">{{ 'NO' | translate }}</mat-radio-button>
             </mat-radio-group>
+          </div>
 
-            <mat-radio-group aria-label="Preach Long Enough" formControlName="qualifiedPreaching">
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-flat-button matStepperNext color="primary">Next</button>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="additionalForm" optional>
+      <div class="step-content">
+        <form [formGroup]="additionalForm">
+          <ng-template matStepLabel>Additional Info</ng-template>
+
+          <div class="info-group">
+            <label>Campus Student</label>
+
+            <mat-radio-group formControlName="campusStudent">
               <mat-radio-button value="Yes">{{ 'YES' | translate }}</mat-radio-button>
               <mat-radio-button value="No">{{ 'NO' | translate }}</mat-radio-button>
             </mat-radio-group>
-          </mat-expansion-panel>
-        </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Show additional information
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-
+          <div class="info-group">
             <label>Subject</label>
-            <div class="width-100-percent">
-              <mat-checkbox>{{ 'PREACH_FATHER_Q' | translate }}</mat-checkbox>
-            </div>
-            <div class="width-100-percent">
-              <mat-checkbox>{{ 'PREACH_MOTHER_Q' | translate }}</mat-checkbox>
-            </div>
-            <div class="width-100-percent">
-              <mat-checkbox>{{ 'PREACH_PASSOVER_Q' | translate }}</mat-checkbox>
-            </div>
-            <div class="width-100-percent">
-              <mat-checkbox>{{ 'PREACH_DIFFERENT_SUBJECT' | translate }}</mat-checkbox>
-            </div>
 
-            <mat-form-field>
-              <input matInput placeholder="Preach Different Subject" formControlName="preachDifferentSubject">
-            </mat-form-field>
+            <mat-checkbox>{{ 'PREACH_FATHER_Q' | translate }}</mat-checkbox>
 
-            <mat-form-field>
-              <input matInput placeholder="Preach Location" formControlName="preachingLocation">
-            </mat-form-field>
+            <mat-checkbox>{{ 'PREACH_MOTHER_Q' | translate }}</mat-checkbox>
 
-            <mat-radio-group aria-label="Gender" formControlName="gender">
+            <mat-checkbox>{{ 'PREACH_PASSOVER_Q' | translate }}</mat-checkbox>
+
+            <mat-checkbox (change)="showOtherSubjects = !showOtherSubjects">{{ 'PREACH_DIFFERENT_SUBJECT' | translate }}</mat-checkbox>
+          </div>
+
+          <mat-form-field floatLabel="always" *ngIf="showOtherSubjects">
+            <input matInput placeholder="Preach Different Subject" formControlName="preachDifferentSubject">
+          </mat-form-field>
+
+          <mat-form-field floatLabel="always">
+            <input matInput placeholder="Preach Location" formControlName="preachingLocation">
+          </mat-form-field>
+
+          <div class="info-group">
+            <label>Gender</label>
+
+            <mat-radio-group formControlName="gender">
               <mat-radio-button value="M">{{ 'MALE' | translate }}</mat-radio-button>
               <mat-radio-button value="F">{{ 'FEMALE' | translate }}</mat-radio-button>
             </mat-radio-group>
+          </div>
 
-            <mat-radio-group aria-label="Age" formControlName="age">
+          <div class="info-group">
+            <label>Contact Age</label>
+
+            <mat-radio-group formControlName="age">
               <mat-radio-button value="under18">{{ 'UNDER18' | translate }}</mat-radio-button>
               <mat-radio-button value="18to30">{{ 'FROM18TO30' | translate }}</mat-radio-button>
               <mat-radio-button value="above30">{{ 'ABOVE30' | translate }}</mat-radio-button>
-              <mat-radio-button value="Other">{{ 'OTHER' | translate }}</mat-radio-button>
+              <mat-radio-button value="Other" (change)="showCurrentAge = !showCurrentAge">{{ 'OTHER' | translate }}</mat-radio-button>
             </mat-radio-group>
+          </div>
 
-            <mat-form-field>
-              <input matInput placeholder="Contact Age" formControlName="contactAge">
-            </mat-form-field>
+          <mat-form-field floatLabel="always" *ngIf="showCurrentAge">
+            <input matInput placeholder="Current Age" formControlName="contactAge">
+          </mat-form-field>
 
-            <mat-radio-group aria-label="Preferred Language" formControlName="preferredLanguageOption">
+          <div class="info-group">
+            <label>Preferred Language</label>
+
+            <mat-radio-group formControlName="preferredLanguageOption">
               <mat-radio-button value="English">{{ 'ENGLISH' | translate }}</mat-radio-button>
               <mat-radio-button value="Spanish">{{ 'SPANISH' | translate }}</mat-radio-button>
               <mat-radio-button value="Both">{{ 'BOTH' | translate }}</mat-radio-button>
-              <mat-radio-button value="Other">{{ 'OTHER' | translate }}</mat-radio-button>
+              <mat-radio-button value="Other" (change)="showOtherLanguage = !showOtherLanguage">{{ 'OTHER' | translate }}</mat-radio-button>
             </mat-radio-group>
+          </div>
 
-            <mat-form-field>
-              <input matInput placeholder="Preferred Language" formControlName="preferredLanguage">
-            </mat-form-field>
+          <mat-form-field floatLabel="always" *ngIf="showOtherLanguage">
+            <input matInput placeholder="Other Language" formControlName="preferredLanguage">
+          </mat-form-field>
 
-            <mat-form-field>
-              <input matInput placeholder="Occupation" formControlName="occupation">
-            </mat-form-field>
+          <mat-form-field floatLabel="always">
+            <input matInput placeholder="Occupation" formControlName="occupation">
+          </mat-form-field>
 
-            <mat-radio-group aria-label="Religion" formControlName="religionOption">
+          <div class="info-group">
+            <label>Religion</label>
+
+            <mat-radio-group formControlName="religionOption">
               <mat-radio-button value="Baptist">{{ 'BAPTIST' | translate }}</mat-radio-button>
               <mat-radio-button value="Catholic">{{ 'CATHOLIC' | translate }}</mat-radio-button>
               <mat-radio-button value="Jehovah's Witnesses">{{ 'JEHOVAH_WITNESSES' | translate }}</mat-radio-button>
               <mat-radio-button value="Christian">{{ 'CHRISTIAN' | translate }}</mat-radio-button>
               <mat-radio-button value="7th Day Adventist">{{ 'SEVENTH_DAY_ADVENTIST' | translate }}</mat-radio-button>
-              <mat-radio-button value="Other">{{ 'OTHER' | translate }}</mat-radio-button>
+              <mat-radio-button value="Other" (change)="showOtherReligion = !showOtherReligion">{{ 'OTHER' | translate }}</mat-radio-button>
             </mat-radio-group>
+          </div>
 
-            <mat-form-field>
-              <input matInput placeholder="Religion" formControlName="religion">
-            </mat-form-field>
+          <mat-form-field floatLabel="always" *ngIf="showOtherReligion">
+            <input matInput placeholder="Other Religion" formControlName="religion">
+          </mat-form-field>
 
-            <mat-form-field>
-              <textarea matInput placeholder="Notes"></textarea>
-            </mat-form-field>
-          </mat-expansion-panel>
-        </mat-grid-tile>
-      </mat-grid-list>
+          <mat-form-field floatLabel="always">
+            <textarea matInput placeholder="Notes"></textarea>
+          </mat-form-field>
 
-      <button mat-button (click)="submitForm()">{{ 'SUBMIT' | translate }}</button>
-    </form>
-  </div>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-flat-button matStepperNext color="primary">Next</button>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+
+    <mat-step>
+      <div class="step-content">
+        <ng-template matStepLabel>Review</ng-template>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-flat-button (click)="stepper.reset()" color="accent">Reset</button>
+          <button mat-flat-button (click)="submitForm()" color="primary">{{ 'SUBMIT' | translate }}</button>
+        </div>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
 </div>
