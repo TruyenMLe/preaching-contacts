@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import { SharedService } from './shared.service';
@@ -14,7 +14,7 @@ export class AuthService {
   }
 
   authenticate(data) {
-    return this.http.post(environment.baseUrl + '/authentication/login', data)
+    return this.http.post(environment.baseUrl + '/authentication/login', data, {withCredentials: true})
       .pipe(catchError((response) => {
         this.sharedService.toastInfo(response.error.message);
         return throwError(response.error.message);

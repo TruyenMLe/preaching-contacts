@@ -5,6 +5,12 @@ var _ = require('lodash');
 var uuid = require('node-uuid');
 var Group = require('../models/group.model');
 var User = require('../models/user.model');
+var jwt = require('jsonwebtoken');
+var fs = require('fs');
+
+var config = require('../config/config');
+
+var RSA_PRIVATE_KEY = fs.readFileSync('./server/config/jwtRS256.key');
 
 function getLanguageList(req, res) {
   db.collection('languages').find({})
@@ -32,24 +38,17 @@ function login(req, res) {
             messageCode: 'disabled'
           });
         } else {
-          var uid = user._doc.username;
-          var returnedUser = {
-            firstName: user._doc.firstName,
-            middleName: user._doc.middleName,
-            lastName: user._doc.lastName,
-            nickName: user._doc.nickName,
-            username: user._doc.username,
-            region: user._doc.region,
-            zion: user._doc.zion,
-            language: user._doc.language,
-            groupId: user._doc.groupId,
-            roles: user._doc.roles,
-            acceptedPolicy: user._doc.acceptedPolicy,
-            acceptedPolicyDate: user._doc.acceptedPolicyDate,
-            academyMembers: user._doc.academyMembers,
-            appId: user._doc.appId
-          };
-          res.json(returnedUser);
+          var userId = user._doc.username;
+
+          const jwtBearerToken = jwt.sign({}, RSA_PRIVATE_KEY, {
+            algorithm: 'RS256',
+            expiresIn: 7200,
+            subject: userId
+          });
+
+          res.cookie("SESSIONID", jwtBearerToken, {httpOnly:true, secure:config.env === 'production'});
+
+          res.status(200).json({message: 'Successfully login.'});
         }
       }
     } else {
