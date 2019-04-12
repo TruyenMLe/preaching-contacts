@@ -31,7 +31,7 @@ import { AddGroupComponent } from './dashboard/admin/add-group/add-group.compone
 import { MoveMemberComponent } from './dashboard/admin/move-member/move-member.component';
 import { ReportsComponent } from './dashboard/admin/reports/reports.component';
 import { UnauthorizedComponent } from '../shared/features/unauthorized/unauthorized.component';
-import { AuthGuardService } from '../shared/features/auth-guard.service';
+import { AuthGuard } from '../shared/services/auth.guard';
 
 const routes: Routes = [
   {
@@ -46,6 +46,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -178,7 +179,7 @@ const routes: Routes = [
       {
         path: 'admin',
         component: AdminComponent,
-        canActivate: [AuthGuardService],
+        canActivate: [AuthGuard],
         data: { title: 'Admin' },
         children: [
           {

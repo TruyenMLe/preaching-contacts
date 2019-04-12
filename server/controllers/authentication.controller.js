@@ -42,7 +42,7 @@ function login(req, res) {
 
           const jwtBearerToken = jwt.sign({}, RSA_PRIVATE_KEY, {
             algorithm: 'RS256',
-            expiresIn: 7200,
+            expiresIn: 900, // 15 minutes
             subject: userId
           });
 
@@ -187,11 +187,16 @@ function makeReports(req, res) {
     });
 }
 
+function validateSession(req, res) {
+  res.status(200).json({valid: true});
+}
+
 module.exports = {
   getLanguageList: getLanguageList,
   login: login,
   makeReports: makeReports,
   resetPassword: resetPassword,
   signup: signup,
-  submitForm: submitForm
+  submitForm: submitForm,
+  validateSession: validateSession
 };

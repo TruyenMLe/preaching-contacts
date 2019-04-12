@@ -16,6 +16,7 @@ var checkIfAuthenticated = expressJwt({
 module.exports = router;
 
 router.get('/languages', authenticationCtrl.getLanguageList);
+router.get('/session', checkIfAuthenticated, authenticationCtrl.validateSession);
 router.post('/login', authenticationCtrl.login);
 router.post('/password/reset', authenticationCtrl.resetPassword);
 router.post('/reports', authenticationCtrl.makeReports);
