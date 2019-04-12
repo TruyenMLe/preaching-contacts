@@ -7,7 +7,7 @@ var Group = require('../models/group.model');
 var User = require('../models/user.model');
 var jwt = require('jsonwebtoken');
 var fs = require('fs');
-
+var jwtDecode = require('jwt-decode');
 var config = require('../config/config');
 
 var RSA_PRIVATE_KEY = fs.readFileSync('./server/config/jwtRS256.key');
@@ -187,6 +187,24 @@ function makeReports(req, res) {
     });
 }
 
+function validateAdmin(req, res) {
+  var decoded = jwtDecode(req.cookies.SESSIONID);
+
+  User.findOne({ username: decoded.sub }, function (err, existedUser) {
+    if (!err) {
+      var isAdmin = existedUser.roles.indexOf('admin') > -1;
+
+      if (isAdmin) {
+        res.status(200).json({valid: true});
+      } else {
+        res.status(500).json({message: 'User is not an administrator'});
+      }
+    } else {
+      res.status(500).json({message: 'Error finding existing user!'});
+    }
+  });
+}
+
 function validateSession(req, res) {
   res.status(200).json({valid: true});
 }
@@ -198,5 +216,6 @@ module.exports = {
   resetPassword: resetPassword,
   signup: signup,
   submitForm: submitForm,
+  validateAdmin: validateAdmin,
   validateSession: validateSession
 };

@@ -32,6 +32,7 @@ import { MoveMemberComponent } from './dashboard/admin/move-member/move-member.c
 import { ReportsComponent } from './dashboard/admin/reports/reports.component';
 import { UnauthorizedComponent } from '../shared/features/unauthorized/unauthorized.component';
 import { AuthGuard } from '../shared/services/auth.guard';
+import { AdminGuard } from '../shared/services/admin.guard';
 
 const routes: Routes = [
   {
@@ -179,7 +180,7 @@ const routes: Routes = [
       {
         path: 'admin',
         component: AdminComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AdminGuard],
         data: { title: 'Admin' },
         children: [
           {

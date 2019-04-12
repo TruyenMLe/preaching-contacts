@@ -26,6 +26,13 @@ export class AuthService {
       }));
   }
 
+  checkAdminPrivilege() {
+    return this.http.get(environment.baseUrl + '/authentication/admin')
+      .pipe(catchError(() => {
+        return of({valid: false});
+      }));
+  }
+
   checkSessionToken() {
     return this.http.get(environment.baseUrl + '/authentication/session')
       .pipe(catchError(() => {
