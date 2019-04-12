@@ -5,6 +5,7 @@ var _ = require('lodash');
 var uuid = require('node-uuid');
 var Group = require('../models/group.model');
 var User = require('../models/user.model');
+var Token = require('../models/token.model');
 var jwt = require('jsonwebtoken');
 var fs = require('fs');
 var jwtDecode = require('jwt-decode');
@@ -48,7 +49,17 @@ function login(req, res) {
 
           res.cookie("SESSIONID", jwtBearerToken, {httpOnly:true, secure:config.env === 'production'});
 
-          res.status(200).json({message: 'Successfully login.'});
+          var token = new Token({username: userId, sessionId: jwtBearerToken, status: 'active'});
+
+          token.save(function(err, newToken) {
+            if (!err) {
+              if (newToken) {
+                res.status(200).json({message: 'Successfully login.'});
+              }
+            } else {
+              res.status(500).json({message: 'Error saving token.'});
+            }
+          });
         }
       }
     } else {
@@ -206,7 +217,19 @@ function validateAdmin(req, res) {
 }
 
 function validateSession(req, res) {
-  res.status(200).json({valid: true});
+  var decoded = jwtDecode(req.cookies.SESSIONID);
+
+  Token.findOne({username: decoded.sub}, function(err, token) {
+    if (!err) {
+      if (token && token.status === 'active') {
+        res.status(200).json({valid: true});
+      } else {
+        res.status(500).json({message: 'Token is current not active. Please contact administrator for more information.'});
+      }
+    } else {
+      res.status(500).json({message: 'Error validating user token.'});
+    }
+  });
 }
 
 module.exports = {
