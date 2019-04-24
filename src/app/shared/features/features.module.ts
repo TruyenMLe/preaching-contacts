@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { MatButtonModule, MatGridListModule, MatTableModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 
@@ -11,6 +12,7 @@ import { DataTableComponent } from './data-table/data-table.component';
   declarations: [UnauthorizedComponent, PlainFeatureComponent, DataTableComponent],
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule,
     MatButtonModule,
     MatGridListModule,

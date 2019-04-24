@@ -1,4 +1,12 @@
 <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
+  <ng-container matColumnDef="selection" *ngIf="selection">
+    <th mat-header-cell *matHeaderCellDef>
+      <input type="checkbox" [ngModel]="selectAll" (ngModelChange)="toggleAllSelection($event)">
+    </th>
+    <td mat-cell *matCellDef="let element">
+      <input type="checkbox" [(ngModel)]="selectedData[element[identifier]]" (ngModelChange)="toggleSelection()">
+    </td>
+  </ng-container>
   <ng-container matColumnDef="{{column.value}}" *ngFor="let column of columnsToDisplay"
                 [sticky]="stickyColumn && (column.value === stickyColumn)">
     <th mat-header-cell *matHeaderCellDef> {{column.name}} </th>
@@ -7,7 +15,7 @@
 
   <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
   <ng-container matColumnDef="expandedDetail">
-    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="selection ? columnsToDisplay.length + 1 : columnsToDisplay.length">
       <div class="data-row-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
       </div>
     </td>

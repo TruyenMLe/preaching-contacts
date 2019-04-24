@@ -19,14 +19,43 @@ export class DataTableComponent implements OnInit {
   @Input() dataSource: any[];
   @Input() columnsToDisplay: NameValue[];
   @Input() stickyColumn: string;
+  @Input() selection: boolean;
+  @Input() identifier: string;
 
   expandedElement: any | null;
   columnsToDisplayValues: string[];
+  selectAll: boolean;
+  selectedData: any;
 
-  constructor() { }
+  constructor() {
+    this.selectedData = {};
+  }
 
   ngOnInit() {
     this.columnsToDisplayValues = this.columnsToDisplay.map(column => column.value);
+
+    if (this.selection) {
+      this.columnsToDisplayValues.unshift('selection');
+    }
+  }
+
+  toggleAllSelection(value) {
+    this.selectAll = value;
+    for (const dataRow of this.dataSource) {
+      this.selectedData[dataRow[this.identifier]] = this.selectAll;
+    }
+  }
+
+  toggleSelection() {
+    let count = 0;
+
+    for (const prop in this.selectedData) {
+      if (this.selectedData.hasOwnProperty(prop) && this.selectedData[prop]) {
+        count++;
+      }
+    }
+
+    this.selectAll = count === this.dataSource.length;
   }
 
 }
