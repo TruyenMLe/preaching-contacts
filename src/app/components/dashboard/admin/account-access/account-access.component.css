@@ -1,0 +1,7 @@
+.button-row {
+  padding: 15px;
+}
+
+.button-row button {
+  float: right;
+}

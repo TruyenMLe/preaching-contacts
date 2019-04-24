@@ -1,1 +1,9 @@
-<app-plain-feature></app-plain-feature>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons [length]="pageLength" [pageIndex]="pageIndex"
+               [pageSize]="pageSize" (page)="goToNewPage($event)"></mat-paginator>
+
+<app-data-table [dataSource]="dataSource" [columnsToDisplay]="columnsToDisplay" #dataTable
+                [stickyColumn]="stickyColumn" [selection]="true" [identifier]="'username'"></app-data-table>
+
+<div class="button-row">
+  <button mat-flat-button (click)="enableAccount(dataTable)" class="mat-primary">Enable</button>
+</div>
