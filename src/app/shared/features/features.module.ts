@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { MatButtonModule, MatGridListModule, MatTableModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatGridListModule, MatTableModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
@@ -12,9 +11,9 @@ import { DataTableComponent } from './data-table/data-table.component';
   declarations: [UnauthorizedComponent, PlainFeatureComponent, DataTableComponent],
   imports: [
     CommonModule,
-    FormsModule,
     RouterModule,
     MatButtonModule,
+    MatCheckboxModule,
     MatGridListModule,
     MatTableModule
   ],

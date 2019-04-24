@@ -29,7 +29,7 @@ export class AccountAccessComponent implements OnInit {
   }
 
   enableAccount(dataTableRef: DataTableComponent) {
-    console.log(dataTableRef.selectedData);
+    console.log(dataTableRef.selection.selected);
   }
 
   goToNewPage(newPage) {

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { SelectionModel } from '@angular/cdk/collections';
 
 import { NameValue } from '../../../types';
 
@@ -19,16 +20,14 @@ export class DataTableComponent implements OnInit {
   @Input() dataSource: any[];
   @Input() columnsToDisplay: NameValue[];
   @Input() stickyColumn: string;
-  @Input() selection: boolean;
+  @Input() selectable: boolean;
   @Input() identifier: string;
 
   expandedElement: any | null;
   columnsToDisplayValues: string[];
-  selectAll: boolean;
-  selectedData: any;
+  selection = new SelectionModel<any>(true, []);
 
   constructor() {
-    this.selectedData = {};
   }
 
   ngOnInit() {
@@ -39,23 +38,19 @@ export class DataTableComponent implements OnInit {
     }
   }
 
-  toggleAllSelection(value) {
-    this.selectAll = value;
-    for (const dataRow of this.dataSource) {
-      this.selectedData[dataRow[this.identifier]] = this.selectAll;
-    }
+  isAllSelected() {
+    return this.selection.selected.length === this.dataSource.length;
   }
 
-  toggleSelection() {
-    let count = 0;
+  masterToggle() {
+    this.isAllSelected() ? this.selection.clear() : this.dataSource.forEach(row => this.selection.select(row));
+  }
 
-    for (const prop in this.selectedData) {
-      if (this.selectedData.hasOwnProperty(prop) && this.selectedData[prop]) {
-        count++;
-      }
+  checkboxLabel(row?: any): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
-
-    this.selectAll = count === this.dataSource.length;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
 
 }
