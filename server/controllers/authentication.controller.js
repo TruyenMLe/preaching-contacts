@@ -43,7 +43,7 @@ function login(req, res) {
 
           const jwtBearerToken = jwt.sign({}, RSA_PRIVATE_KEY, {
             algorithm: 'RS256',
-            expiresIn: 900, // 15 minutes
+            expiresIn: 7200, // 2 hours
             subject: userId
           });
 
