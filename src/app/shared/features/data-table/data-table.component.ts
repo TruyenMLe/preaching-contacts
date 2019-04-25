@@ -39,7 +39,7 @@ export class DataTableComponent implements OnInit {
   }
 
   isAllSelected() {
-    return this.selection.selected.length === this.dataSource.length;
+    return this.dataSource ? this.selection.selected.length === this.dataSource.length : false;
   }
 
   masterToggle() {

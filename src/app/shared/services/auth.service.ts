@@ -1,7 +1,7 @@
 import { Inject, Injectable, InjectionToken, PLATFORM_ID } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { of, throwError } from 'rxjs';
+import { forkJoin, of, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
@@ -49,5 +49,19 @@ export class AuthService {
 
   clearSessionToken() {
     return this.http.delete(environment.baseUrl + '/authentication/session');
+  }
+
+  enableAccount(accounts) {
+    const serviceCalls = [];
+
+    for (const account of accounts) {
+      serviceCalls.push(this.http.get(environment.baseUrl + '/users/enable/' + account.username));
+    }
+
+    return forkJoin(serviceCalls);
+  }
+
+  getRequestedUsers() {
+    return this.http.get(environment.baseUrl + '/users/requested');
   }
 }

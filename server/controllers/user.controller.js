@@ -69,27 +69,13 @@ function deleteRequestByUsername(req, res) {
 }
 
 function enableUser(req, res) {
-  var updateStatus,
-    count = 0;
-
-  for (var account in req.body) {
-    if (req.body.hasOwnProperty(account)) {
-      count++;
-
-      User.update({ username: account }, { disabled: false }, function (err, users) {
-        if (!err) {
-          if (users) {
-            count--;
-          }
-          if (count === 0) {
-            res.status(200).json({message: 'Successfully updated requests'});
-          }
-        } else {
-          res.status(500).json({message: 'Error finding users!'});
-        }
-      });
+  User.update({ username: req.params.username }, { disabled: false }, function (err, users) {
+    if (!err) {
+      res.status(200).json({message: 'Successfully updated requests'});
+    } else {
+      res.status(500).json({message: 'Error finding users!'});
     }
-  }
+  });
 }
 
 function getMember(req, res) {
