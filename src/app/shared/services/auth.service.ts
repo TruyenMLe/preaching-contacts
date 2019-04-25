@@ -2,7 +2,7 @@ import { Inject, Injectable, InjectionToken, PLATFORM_ID } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { of, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import { SharedService } from './shared.service';
@@ -35,8 +35,19 @@ export class AuthService {
 
   checkSessionToken() {
     return this.http.get(environment.baseUrl + '/authentication/session')
-      .pipe(catchError(() => {
-        return of({valid: false});
+      .pipe(catchError((response) => {
+        if (response.error && response.error.message === 'jwt expired') {
+          return this.clearSessionToken()
+            .pipe(tap(() => {
+              return of({valid: false});
+            }));
+        } else {
+          return of({valid: false});
+        }
       }));
+  }
+
+  clearSessionToken() {
+    return this.http.delete(environment.baseUrl + '/authentication/session');
   }
 }

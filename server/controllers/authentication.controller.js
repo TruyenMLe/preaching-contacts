@@ -232,7 +232,20 @@ function validateSession(req, res) {
   });
 }
 
+function deleteSession(req, res) {
+  var decoded = jwtDecode(req.cookies.SESSIONID);
+
+  Token.findOneAndDelete({username: decoded.sub}, function(err) {
+    if (!err) {
+      res.status(200).json({message: 'Successfully removed current session.'});
+    } else {
+      res.status(500).json({message: 'Error clearing current session.'});
+    }
+  })
+}
+
 module.exports = {
+  deleteSession: deleteSession,
   getLanguageList: getLanguageList,
   login: login,
   makeReports: makeReports,

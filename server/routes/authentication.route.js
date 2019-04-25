@@ -23,3 +23,4 @@ router.post('/password/reset', authenticationCtrl.resetPassword);
 router.post('/reports', authenticationCtrl.makeReports);
 router.post('/signup', authenticationCtrl.signup);
 router.post('/submitForm', checkIfAuthenticated, authenticationCtrl.submitForm);
+router.delete('/session', authenticationCtrl.deleteSession);
