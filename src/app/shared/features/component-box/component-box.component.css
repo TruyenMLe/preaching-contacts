@@ -1,0 +1,23 @@
+.box-bg {
+  background: #ffffff;
+}
+
+.box-bg .box-title {
+  background: #3498db;
+  color: #ffffff;
+  padding: 1rem;
+}
+
+.box-bg .box-title h2 {
+  margin: 0;
+}
+
+.box-bg .content {
+  padding: 15px;
+}
+
+.box-title {
+  font-family: "Pompiere", Roboto, "Helvetica Neue", sans-serif;
+  display: flex;
+  justify-content: space-between;
+}

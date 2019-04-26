@@ -35,6 +35,10 @@ body {
 .width-50-percent {
   width: 50% !important;
 }
+
+.width-30-percent {
+  width: 30%;
+}
 /* Width */
 
 /* Margin */
@@ -59,4 +63,9 @@ body {
 .mat-drawer-container {
   background: #ecf0f1;
 }
+
+.text-right {
+  text-align: right;
+}
+
 /* Miscellaneous */

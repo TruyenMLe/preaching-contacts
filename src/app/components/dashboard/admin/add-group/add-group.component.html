@@ -1,1 +1,35 @@
-<app-plain-feature></app-plain-feature>
+<form [formGroup]="addGroupForm">
+  <div class="form-group">
+    <mat-form-field floatLabel="always">
+      <input matInput placeholder="Region" formControlName="region" [matAutocomplete]="region">
+    </mat-form-field>
+
+    <mat-autocomplete #region="matAutocomplete">
+      <mat-option *ngFor="let region of regions" [value]="region.regionId">
+        {{ region.regionName }}
+      </mat-option>
+    </mat-autocomplete>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field floatLabel="always">
+      <input matInput placeholder="Zion" formControlName="zion" [matAutocomplete]="zion">
+    </mat-form-field>
+
+    <mat-autocomplete #zion="matAutocomplete">
+      <mat-option *ngFor="let zion of zions" [value]="zion.zionId">
+        {{ zion.zionName }}
+      </mat-option>
+    </mat-autocomplete>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field floatLabel="always">
+      <input matInput placeholder="Group Name" formControlName="groupName">
+    </mat-form-field>
+  </div>
+
+  <div class="text-right">
+    <button mat-flat-button color="primary">CREATE</button>
+  </div>
+</form>
