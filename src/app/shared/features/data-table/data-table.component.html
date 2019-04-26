@@ -29,10 +29,20 @@
     </td>
   </ng-container>
 
+  <ng-container matColumnDef="noRecord">
+    <td mat-footer-cell *matFooterCellDef [attr.colspan]="selection ? columnsToDisplay.length + 1 : columnsToDisplay.length">
+      No records found.
+    </td>
+  </ng-container>
+
   <tr mat-header-row *matHeaderRowDef="columnsToDisplayValues; sticky: true"></tr>
   <tr mat-row *matRowDef="let element; columns: columnsToDisplayValues;" class="data-row"
       [class.data-expanded-row]="expandedElement === element"
       (click)="expandedElement = expandedElement === element ? null : element">
   </tr>
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="data-detail-row"></tr>
+
+  <ng-container *ngIf="!dataLength">
+    <tr mat-footer-row *matFooterRowDef="['noRecord']" class="data-row-empty"></tr>
+  </ng-container>
 </table>

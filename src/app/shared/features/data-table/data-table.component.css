@@ -22,3 +22,7 @@ tr.data-row:not(.data-expanded-row):active {
   overflow: hidden;
   display: flex;
 }
+
+.data-row-empty {
+  text-align: center;
+}

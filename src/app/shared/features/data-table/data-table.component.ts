@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
 
@@ -16,7 +16,7 @@ import { NameValue } from '../../../types';
     ]),
   ]
 })
-export class DataTableComponent implements OnInit {
+export class DataTableComponent implements OnInit, OnChanges {
   @Input() dataSource: any[];
   @Input() columnsToDisplay: NameValue[];
   @Input() stickyColumn: string;
@@ -26,6 +26,7 @@ export class DataTableComponent implements OnInit {
   expandedElement: any | null;
   columnsToDisplayValues: string[];
   selection = new SelectionModel<any>(true, []);
+  dataLength: number;
 
   constructor() {
   }
@@ -35,6 +36,12 @@ export class DataTableComponent implements OnInit {
 
     if (this.selection) {
       this.columnsToDisplayValues.unshift('selection');
+    }
+  }
+
+  ngOnChanges(changes) {
+    if (changes && changes.dataSource && changes.dataSource.currentValue) {
+      this.dataLength = changes.dataSource.currentValue.length;
     }
   }
 
