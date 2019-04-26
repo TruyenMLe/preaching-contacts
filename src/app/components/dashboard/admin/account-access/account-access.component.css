@@ -1,7 +1,3 @@
-.button-row {
-  padding: 15px;
-}
-
-.button-row button {
-  float: right;
+.text-right button {
+  margin-top: 1.25rem;
 }
