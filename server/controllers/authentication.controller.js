@@ -41,23 +41,48 @@ function login(req, res) {
         } else {
           var userId = user._doc.username;
 
-          const jwtBearerToken = jwt.sign({}, RSA_PRIVATE_KEY, {
-            algorithm: 'RS256',
-            expiresIn: 7200, // 2 hours
-            subject: userId
-          });
-
-          res.cookie("SESSIONID", jwtBearerToken, {httpOnly:true, secure:config.env === 'production'});
-
-          var token = new Token({username: userId, sessionId: jwtBearerToken, status: 'active'});
-
-          token.save(function(err, newToken) {
+          Token.findOne({username: userId}, function(err, existingToken) {
             if (!err) {
-              if (newToken) {
-                res.status(200).json({message: 'Successfully login.'});
+              const jwtBearerToken = jwt.sign({}, RSA_PRIVATE_KEY, {
+                algorithm: 'RS256',
+                expiresIn: 7200, // 2 hours
+                subject: userId
+              });
+
+              res.cookie("SESSIONID", jwtBearerToken, {httpOnly:true, secure:config.env === 'production'});
+
+              if (!existingToken) {
+
+                var token = new Token({username: userId, sessionId: jwtBearerToken, status: 'active'});
+
+                token.save(function(err, newToken) {
+                  if (!err) {
+                    if (newToken) {
+                      res.status(200).json({message: 'Successfully login.'});
+                    }
+                  } else {
+                    res.status(500).json({message: 'Error saving token.'});
+                  }
+                });
+              } else {
+                var decoded = jwtDecode(existingToken.sessionId);
+
+                if (decoded.exp < ((new Date()).getTime() / 1000)) {
+                  existingToken.sessionId = jwtBearerToken;
+
+                  existingToken.save(function(err) {
+                    if (!err) {
+                      res.status(200).json({message: 'Successfully login.'});
+                    } else {
+                      res.status(500).json({message: 'Error saving token.'});
+                    }
+                  });
+                } else {
+                  res.status(200).json({message: 'Successfully login.'});
+                }
               }
             } else {
-              res.status(500).json({message: 'Error saving token.'});
+              res.status(500).json({message: 'Error finding token.'});
             }
           });
         }
